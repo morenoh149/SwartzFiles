@@ -1,0 +1,86 @@
+<html>
+  <head>
+    <title>Aaron Swartz Files</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/style.css">
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="app.js"></script>
+  </head>
+  <body>
+    <div class="row">
+      <div class="sidebar col-sm-3">
+        <h2>Secret Service Response to Request for Aaron Swartz' Records</h2>
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingOne">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  Part 1
+                </a>
+              </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+              <div class="panel-body">
+                part 1
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingTwo">
+              <h4 class="panel-title">
+                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  Part 2
+                </a>
+              </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+              <div class="panel-body">
+                part 2
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingThree">
+              <h4 class="panel-title">
+                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  Part 3
+                </a>
+              </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+              <div class="panel-body">
+                part 3
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="main col-sm-9">
+        foo
+        l;aksdjf;laksjdfas
+        l;kajsdfpilajsdpf
+        <br>
+        laksjdfpilasjdfpai
+        pfoo
+        l;aksdjf;laksjdfas
+        l;kajsdfpilajsdpf
+        <br>
+alsdijfpasfoo
+        l;aksdjf;laksjdfas
+        l;kajsdfpilajsdpf
+        <br>
+idjffoo
+        l;aksdjf;laksjdfas
+        l;kajsdfpilajsdpf
+        <br>
+foo
+        l;aksdjf;laksjdfas
+        l;kajsdfpilajsdpf
+      </div>
+    </div>
+  </body>
+</html>

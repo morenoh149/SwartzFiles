@@ -3,15 +3,17 @@ html
   head
     meta(charset="utf-8")
     meta(http-equiv="X-UA-Compatible" content="IE=edge")
-    title= Aaron Swartz Files
+    title= 'Aaron Swartz Files'
     meta(name="viewport", content="width=device-width, initial-scale=1.0, user-scalable=no")
     meta(name='description', content='')
 
     link(rel="shortcut icon", href="/favicon.ico", type="image/x-icon")
 
-    link(href="/styles/style.css", rel="stylesheet")
-
-  body
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css")
+    link(rel="stylesheet" href="styles/style.css")
+    script(src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js")
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js")
+    script(src='app.js')
     script.
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -20,86 +22,198 @@ html
 
       ga('create', 'UA-42985946-6', 'auto');
       ga('send', 'pageview');
+  body
+    .row
+      .sidebar.col-sm-3
+        h2 Secret Service Response to Request for Aaron Swartz' Records
+        .panel-group#accordion(role='tablist' aria-multiselectable='true')
 
-    nav.navbar.navbar-default(role='navigation')
-      .container-fluid
-        .navbar-header
-          button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar-collapsable')
-            span.sr-only Toggle navigation
-            span.icon-bar
-            span.icon-bar
-            span.icon-bar
-          a.navbar-brand(href="/")
-            img(src="http://sfbayareashpe.org/wp-content/uploads/2014/02/new_shpe_logo_color.png")
-        .collapse.navbar-collapse#navbar-collapsable
-          ul.navbar-nav.nav
-            each link in navLinks
-              li(class=(section == link.key ? 'active' : null)): a(href=link.href)= link.label
-            // if user
-            //   li: a(href='/keystone') Open Keystone
-            //   li: a(href='/keystone/signout') Sign Out
-            // else
-            //   li: a(href='/keystone/signin') Sign In
+          .panel.panel-default
+            .panel-heading#headingOne(role='tab')
+              h4.panel-title
+                a(data-toggle='collapse' data-parent='#accordion' href='#collapseOne' aria-expanded='true' aria-controls='collapseOne')
+                  | Part 1
+          #collapseOne.panel-collapse.collapse.in(role='tabpanel' aria-labelledby='headingOne')
+            .panel-body
+              | part 1
 
-    //- BODY
-    #body
+          .panel.panel-default
+            .panel-heading#headingTwo(role='tab')
+              h4.panel-title
+                a.collapsed(data-toggle='collapse' data-parent='#accordion' href='#collapseTwo' aria-expanded='false' aria-controls='collapseTwo')
+                  | Part 2
+          #collapseTwo.panel-collapse.collapse(role='tabpanel' aria-labelledby='headingTwo')
+            .panel-body
+              | part 2
 
-      //- NOTE:
-      //- There is no .container wrapping class around body blocks to allow more flexibility in design.
-      //- Remember to include it in your templates when you override the intro and content blocks!
+          .panel.panel-default
+            .panel-heading#headingThree(role='tab')
+              h4.panel-title
+                a.collapsed(data-toggle='collapse' data-parent='#accordion' href='#collapseThree' aria-expanded='false' aria-controls='collapseThree')
+                  | Part 3
+          #collapseThree.panel-collapse.collapse(role='tabpanel' aria-labelledby='headingThree')
+            .panel-body
+              | part 3
 
-      //- The Intro block appears above flash messages (used for temporary information display)
-      block intro
+          .panel.panel-default
+            .panel-heading#headingFour(role='tab')
+              h4.panel-title
+                a.collapsed(data-toggle='collapse' data-parent='#accordion' href='#collapseFour' aria-expanded='false' aria-controls='collapseFour')
+                  | Part 4
+          #collapseFour.panel-collapse.collapse(role='tabpanel' aria-labelledby='headingFour')
+            .panel-body
+              | part 4
 
-      //- Flash messages allow you to display once-off status messages to users, e.g. form
-      //- validation errors, success messages, etc.
-      +flash-messages(messages)
+          .panel.panel-default
+            .panel-heading#headingFive(role='tab')
+              h4.panel-title
+                a.collapsed(data-toggle='collapse' data-parent='#accordion' href='#collapseFive' aria-expanded='false' aria-controls='collapseFive')
+                  | Part 5
+          #collapseFive.panel-collapse.collapse(role='tabpanel' aria-labelledby='headingFive')
+            .panel-body
+              | part 5
 
-      //- The content block should contain the body of your template's content
-      block content
+          .panel.panel-default
+            .panel-heading#headingSix(role='tab')
+              h4.panel-title
+                a.collapsed(data-toggle='collapse' data-parent='#accordion' href='#collapseSix' aria-expanded='false' aria-controls='collapseSix')
+                  | Part 6
+          #collapseSix.panel-collapse.collapse(role='tabpanel' aria-labelledby='headingSix')
+            .panel-body
+              | part 6
 
+          .panel.panel-default
+            .panel-heading#headingSeven(role='tab')
+              h4.panel-title
+                a.collapsed(data-toggle='collapse' data-parent='#accordion' href='#collapseSeven' aria-expanded='false' aria-controls='collapseSeven')
+                  | Part 7
+          #collapseSeven.panel-collapse.collapse(role='tabpanel' aria-labelledby='headingSeven')
+            .panel-body
+              | part 7
 
-    //- FOOTER
-    // TODO figure out why placeholder text is getting clipped on the top in firefox
-    footer.site-footer.container-fluid(role='footer')
-      .section.row
-        .col-sm-1
-        .col-sm-4
-          h3 About SHPE
-          p SHPE's vision is to be the leading social-technical organization whose primary function is to enhance and achieve the potential of Hispanics in engineering, math and science.
-        .col-sm-3
-          h3 Latest News
-          | San Jose Earthquakes Stadium Tour
-          hr
-          | Welcome back mixer!
-          hr
-          | SHPE Engineering Day at The Exploratorium
-          hr
-          | Win a Chevrolet Spark! - SHPE Raffle
-        .col-sm-3
-          h3 Contact Us
-          form(action='')
-            input.form-control(type='text', name='name', placeholder='Name')
-            input.form-control(type='email', name='email', placeholder='Email')
-            textarea.form-control(name='message', placeholder='Message', rows='3')
-            br
-            button.btn.btn-default.spanfix(type='submit')
-              span &gt;
-              | Send
-        .col-sm-1
+          .panel.panel-default
+            .panel-heading#headingEight(role='tab')
+              h4.panel-title
+                a.collapsed(data-toggle='collapse' data-parent='#accordion' href='#collapseEight' aria-expanded='false' aria-controls='collapseEight')
+                  | Part 8
+          #collapseEight.panel-collapse.collapse(role='tabpanel' aria-labelledby='headingEight')
+            .panel-body
+              | part 8
 
-    //- JAVASCRIPT
-    script(src='/js/lib/jquery/jquery-2.1.1.min.js')
+          .panel.panel-default
+            .panel-heading#headingNine(role='tab')
+              h4.panel-title
+                a.collapsed(data-toggle='collapse' data-parent='#accordion' href='#collapseNine' aria-expanded='false' aria-controls='collapseNine')
+                  | Part 9
+          #collapseNine.panel-collapse.collapse(role='tabpanel' aria-labelledby='headingNine')
+            .panel-body
+              | part 9
 
-    //- The KeystoneJS Content Editor provides support for ks-editable data attributes,
-    //- which generate links to edit content for users who can access Keystone
-    if user && user.canAccessKeystone
-      script(src='/keystone/js/content/editor.js')
+          .panel.panel-default
+            .panel-heading#headingTen(role='tab')
+              h4.panel-title
+                a.collapsed(data-toggle='collapse' data-parent='#accordion' href='#collapseTen' aria-expanded='false' aria-controls='collapseTen')
+                  | Part 10
+          #collapseTen.panel-collapse.collapse(role='tabpanel' aria-labelledby='headingTen')
+            .panel-body
+              | part 10
 
-    //- Add scripts that are globally required by your site here.
-    script(src='/js/lib/bootstrap/bootstrap.min.js')
-    script(src='/js/index.js')
-    script(src='/js/slick.js')
+          .panel.panel-default
+            .panel-heading#headingEleven(role='tab')
+              h4.panel-title
+                a.collapsed(data-toggle='collapse' data-parent='#accordion' href='#collapseEleven' aria-expanded='false' aria-controls='collapseEleven')
+                  | Part 11
+          #collapseEleven.panel-collapse.collapse(role='tabpanel' aria-labelledby='headingEleven')
+            .panel-body
+              | part 11
 
-    //- Include template-specific javascript files by extending the js block
-    block js
+          .panel.panel-default
+            .panel-heading#headingTwelve(role='tab')
+              h4.panel-title
+                a.collapsed(data-toggle='collapse' data-parent='#accordion' href='#collapseTwelve' aria-expanded='false' aria-controls='collapseTwelve')
+                  | Part 12
+          #collapseTwelve.panel-collapse.collapse(role='tabpanel' aria-labelledby='headingTwelve')
+            .panel-body
+              | part 12
+
+          .panel.panel-default
+            .panel-heading#headingThirteen(role='tab')
+              h4.panel-title
+                a.collapsed(data-toggle='collapse' data-parent='#accordion' href='#collapseThirteen' aria-expanded='false' aria-controls='collapseThirteen')
+                  | Part 13
+          #collapseThirteen.panel-collapse.collapse(role='tabpanel' aria-labelledby='headingThirteen')
+            .panel-body
+              | part 13
+
+          .panel.panel-default
+            .panel-heading#headingFourteen(role='tab')
+              h4.panel-title
+                a.collapsed(data-toggle='collapse' data-parent='#accordion' href='#collapseFourteen' aria-expanded='false' aria-controls='collapseFourteen')
+                  | Part 14
+          #collapseFourteen.panel-collapse.collapse(role='tabpanel' aria-labelledby='headingFourteen')
+            .panel-body
+              | part 14
+
+          .panel.panel-default
+            .panel-heading#headingFifteen(role='tab')
+              h4.panel-title
+                a.collapsed(data-toggle='collapse' data-parent='#accordion' href='#collapseFifteen' aria-expanded='false' aria-controls='collapseFifteen')
+                  | Part 15
+          #collapseFifteen.panel-collapse.collapse(role='tabpanel' aria-labelledby='headingFifteen')
+            .panel-body
+              | part 15
+
+          .panel.panel-default
+            .panel-heading#headingSixteen(role='tab')
+              h4.panel-title
+                a.collapsed(data-toggle='collapse' data-parent='#accordion' href='#collapseSixteen' aria-expanded='false' aria-controls='collapseSixteen')
+                  | Part 16
+          #collapseSixteen.panel-collapse.collapse(role='tabpanel' aria-labelledby='headingSixteen')
+            .panel-body
+              | part 16
+
+          .panel.panel-default
+            .panel-heading#headingSeventeen(role='tab')
+              h4.panel-title
+                a.collapsed(data-toggle='collapse' data-parent='#accordion' href='#collapseSeventeen' aria-expanded='false' aria-controls='collapseSeventeen')
+                  | Part 17
+          #collapseSeventeen.panel-collapse.collapse(role='tabpanel' aria-labelledby='headingSeventeen')
+            .panel-body
+              | part 17
+
+          .panel.panel-default
+            .panel-heading#headingEighteen(role='tab')
+              h4.panel-title
+                a.collapsed(data-toggle='collapse' data-parent='#accordion' href='#collapseEighteen' aria-expanded='false' aria-controls='collapseEighteen')
+                  | Part 18
+          #collapseEighteen.panel-collapse.collapse(role='tabpanel' aria-labelledby='headingEighteen')
+            .panel-body
+              | part 18
+
+          .panel.panel-default
+            .panel-heading#headingNineteen(role='tab')
+              h4.panel-title
+                a.collapsed(data-toggle='collapse' data-parent='#accordion' href='#collapseNineteen' aria-expanded='false' aria-controls='collapseNineteen')
+                  | Part 19
+          #collapseNineteen.panel-collapse.collapse(role='tabpanel' aria-labelledby='headingNineteen')
+            .panel-body
+              | part 19
+
+          .panel.panel-default
+            .panel-heading#headingTwenty(role='tab')
+              h4.panel-title
+                a.collapsed(data-toggle='collapse' data-parent='#accordion' href='#collapseTwenty' aria-expanded='false' aria-controls='collapseTwenty')
+                  | Part 20
+          #collapseTwenty.panel-collapse.collapse(role='tabpanel' aria-labelledby='headingTwenty')
+            .panel-body
+              | part 20
+
+          .panel.panel-default
+            .panel-heading#headingTwentyOne(role='tab')
+              h4.panel-title
+                a.collapsed(data-toggle='collapse' data-parent='#accordion' href='#collapseTwentyOne' aria-expanded='false' aria-controls='collapseTwentyOne')
+                  | Part 21
+          #collapseTwentyOne.panel-collapse.collapse(role='tabpanel' aria-labelledby='headingTwentyOne')
+            .panel-body
+              | part 21
+
