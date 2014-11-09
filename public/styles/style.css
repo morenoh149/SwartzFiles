@@ -1,0 +1,19 @@
+.affix {
+
+}
+
+.affix-top {
+
+}
+
+.affix-bottom {
+
+}
+
+#myAffix {
+  border: 1px solid black;
+}
+
+.sidebar ul li{
+  border-bottom: 1px solid black;
+}
