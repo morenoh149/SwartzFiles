@@ -21,39 +21,39 @@ html
       ga('create', 'UA-42985946-6', 'auto');
       ga('send', 'pageview');
   body
-    .row
-      .sidebar.col-sm-3
-        h2 Secret Service Response to Request for Aaron Swartz' Records
-        .panel-group#accordion(role='tablist' aria-multiselectable='true')
+    .sidebar
+      h2 Secret Service Response to Request for Aaron Swartz' Records
+      .panel-group#accordion(role='tablist' aria-multiselectable='true')
 
+        .panel.panel-default
+          .panel-heading(role='tab' id='heading1')
+            h4.panel-title
+              a(data-toggle='collapse' data-parent='#accordion' href='#collapse1' aria-expanded='true' aria-controls='collapse1')
+                p Part 1
+        .panel-collapse.collapse.in(role='tabpanel' aria-labelledby='heading1' id='collapse1')
+          .panel-body
+            p part 1
+
+        - n = 2
+        - while (n < 22)
           .panel.panel-default
-            .panel-heading(role='tab' id='heading1')
+            .panel-heading(role='tab' id='heading#{n}')
               h4.panel-title
-                a(data-toggle='collapse' data-parent='#accordion' href='#collapse1' aria-expanded='true' aria-controls='collapse1')
-                  p Part 1
-          .panel-collapse.collapse.in(role='tabpanel' aria-labelledby='heading1' id='collapse1')
+                a(data-toggle='collapse' data-parent='#accordion' href='#collapse#{n}' aria-expanded='false' aria-controls='collapse#{n}')
+                  p Part #{n}
+          .panel-collapse.collapse(role='tabpanel' aria-labelledby='heading#{n}' id='collapse#{n}')
             .panel-body
-              p part 1
+              p part #{n}
+          - n++
 
-          - n = 2
-          - while (n < 22)
-            .panel.panel-default
-              .panel-heading(role='tab' id='heading#{n}')
-                h4.panel-title
-                  a(data-toggle='collapse' data-parent='#accordion' href='#collapse#{n}' aria-expanded='false' aria-controls='collapse#{n}')
-                    p Part #{n}
-            .panel-collapse.collapse(role='tabpanel' aria-labelledby='heading#{n}' id='collapse#{n}')
-              .panel-body
-                p part #{n}
-            - n++
-      .col-sm-9
-        h1 Swartz Files
-        - m = 1
-        - while (m < 25)
-          if (m < 10)
-            img(src='http://swartzfiles.org/foia-request-001-page-00#{m}.jpg')
-          else if (m < 100)
-            img(src='http://swartzfiles.org/foia-request-001-page-0#{m}.jpg')
-          else if (m < 1000)
-            img(src='http://swartzfiles.org/foia-request-001-page-#{m}.jpg')
-          - m++
+    .main
+      h1 Swartz Files
+      - m = 1
+      - while (m < 25)
+        if (m < 10)
+          img(src='http://swartzfiles.org/foia-request-001-page-00#{m}.jpg')
+        else if (m < 100)
+          img(src='http://swartzfiles.org/foia-request-001-page-0#{m}.jpg')
+        else if (m < 1000)
+          img(src='http://swartzfiles.org/foia-request-001-page-#{m}.jpg')
+        - m++
