@@ -32,7 +32,12 @@ html
                 p Part 1
         .panel-collapse.collapse.in(role='tabpanel' aria-labelledby='heading1' id='collapse1')
           .panel-body
-            p part 1
+            ul.list-unstyled
+              - m = 1
+              - while (m < 105)
+                li
+                  a(href='#part1-#{m}') page #{m}
+                - m++
 
         - n = 2
         - while (n < 22)
@@ -49,11 +54,11 @@ html
     .main
       h1 Swartz Files
       - m = 1
-      - while (m < 25)
+      - while (m < 105)
         if (m < 10)
-          img(src='http://swartzfiles.org/foia-request-001-page-00#{m}.jpg')
+          img(src='http://swartzfiles.org/foia-request-001-page-00#{m}.jpg' id='part1-#{m}')
         else if (m < 100)
-          img(src='http://swartzfiles.org/foia-request-001-page-0#{m}.jpg')
+          img(src='http://swartzfiles.org/foia-request-001-page-0#{m}.jpg' id='part1-#{m}')
         else if (m < 1000)
-          img(src='http://swartzfiles.org/foia-request-001-page-#{m}.jpg')
+          img(src='http://swartzfiles.org/foia-request-001-page-#{m}.jpg' id='part1-#{m}')
         - m++
