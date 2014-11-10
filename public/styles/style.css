@@ -17,3 +17,11 @@
 .sidebar ul li{
   border-bottom: 1px solid black;
 }
+
+h2 {
+  font-size: 25px;
+}
+
+img {
+  width: 800px;
+}
