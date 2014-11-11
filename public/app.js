@@ -1,20 +1,18 @@
 /* Globals
- */
-// window.scrollTo(0, 1000);
-// window.scrollBy(0, 1000);
+*/
 var scrollFactor = 10;
 var ImageHeight = 1035;
 var FontHeight = 16;
 var HeaderHeight = 39;
 var topScrollCorrection = ((FontHeight + 2 + ImageHeight) * scrollFactor) - HeaderHeight - 300;
-var startPoint = window.location.hash
+var hash = window.location.hash;
+var datasetEnd = 0;
+var datasetStart = 0;
 
 /* run javascript code while scrolling
  * responsible for detecting end of content and loading more
  */
 window.onscroll = function (ev) {
-  // var docHeight = document.body.offsetHeight;
-  // docHeight = docHeight === undefined ? window.document.documentElement.scrollHeight : docHeight;
   var docHeight = document.getElementById('main').offsetHeight;
 
   var winheight = window.innerHeight;
@@ -25,16 +23,20 @@ window.onscroll = function (ev) {
 
   // run on scroll bottom
   if ((scrollpoint + winheight) >= docHeight) {
-    main.innerHTML += nextImageHTML(scrollFactor);
+    main.innerHTML += nextImageHTML("#part1-" + (datasetEnd+1), scrollFactor);
+    datasetEnd += scrollFactor;
+    console.log('datsetend:', datasetEnd);
     window.setTimeout(function() {
     }, 3000);
   }
 
   // run on scroll top
   if (scrollpoint === 0) {
-    main.innerHTML = nextImageHTML(scrollFactor) + main.innerHTML;
+    main.innerHTML = nextImageHTML("#part1-"+datasetStart, scrollFactor*-1) + main.innerHTML;
+    datasetStart -= scrollFactor;
+    if (datasetStart < 1) datasetStart = 1;
     window.setTimeout(function() {
-      console.log('try to scroll correct');
+      console.log('try to scroll correct by', topScrollCorrection);
       window.scrollTo(0, topScrollCorrection);
     }, 100);
   }
@@ -42,24 +44,41 @@ window.onscroll = function (ev) {
 
 /* generates next anchor+imageTags for injecting into the dom
  * given starting point and delta
+ * start values = ["#part1-20", ""]
+ * delta values = (-inf, -1], [1, +inf)
+ * if no hash -> load first 10 pages
+ * if hash -> load [hash, hash+delta]
+ * (1, 10) -> [1, 10]
+ * (25, 10) -> [25, 35]
+ * (1, -10) -> [1, 1]
+ * (25, -10) -> [15, 24]
+ * (25, -3) -> [22, 24]
  */
 function nextImageHTML(start, delta) {
-  var str = '';
-  if (start === 0) {
-    for (var i = 0; i < delta; i++) {
-      str += '<a id="part1-' + i + '">Part-1-Page' + i + '</a>' +
+  var dom = '';
+  console.log('start: ', start);
+  if (start === '') {
+    for (var i = 1; i <= delta; i++) {
+      dom += '<a id="part1-' + i + '">Part-1-Page' + i + '</a>' +
            '<img src="http://swartzfiles.org/foia-request-001-page-' + zeroFill(i,3) + '.jpg">';
     }
-  } else {
-    var num = parseInt(start.slice(7), 10);
-    var j = num - 3 < 0 ? 0 : num - 3;
-    var end = j + delta;
-    for (; j < end; j++) {
-      str += '<a id="part1-' + j + '">Part-1-Page' + j + '</a>' +
-           '<img src="http://swartzfiles.org/foia-request-001-page-' + zeroFill(j,3) + '.jpg">';
+  } else if (validHash(start)) {
+    var num = extractPoint(start);
+    if (delta > 0) {
+      for (var i = num; i < num+delta; i++) {
+        dom += '<a id="part1-' + i + '">Part-1-Page' + i + '</a>' +
+             '<img src="http://swartzfiles.org/foia-request-001-page-' + zeroFill(i,3) + '.jpg">';
+      }
+    } else if (delta < 0) {
+      for (var i = num; i > num-delta; i--) {
+        dom += '<a id="part1-' + i + '">Part-1-Page' + i + '</a>' +
+             '<img src="http://swartzfiles.org/foia-request-001-page-' + zeroFill(i,3) + '.jpg">';
+      }
+    } else {
+      console.log('delta is zero. what do?');
     }
   }
-  return str;
+  return dom;
 }
 
 /* accepts a number and magnitude
@@ -77,22 +96,35 @@ function zeroFill(num, mag) {
   return result;
 }
 
-/* sanitizes browser hash
+/* validates browser hash
  * we only use it if it fits the format we expect
+ * returns boolean
  */
-function sanitizeHash(str) {
+function validHash(str) {
   return str.slice(0,7) === '#part1-' ? true : false;
+}
+
+/* parses hash to extract point in dataset
+ * "#part1-26" -> 26
+ * "" -> 1
+ */
+function extractPoint(hash) {
+  if (hash === '') return 1;
+  else return parseInt(hash.slice(7), 10);
 }
 
 /* JQuery padded code
  */
 $(function() {
   var main = document.getElementById('main');
-  if (sanitizeHash(window.location.hash)) {
-    console.log('starting point middle load buffers');
-    main.innerHTML = nextImageHTML(window.location.hash, scrollFactor);
+  if (validHash(hash)) {
+    main.innerHTML = nextImageHTML(hash, -3) + nextImageHTML(hash, scrollFactor);
+    datasetStart = extractPoint(hash) - 3;
+    datasetEnd = extractPoint(hash) + scrollFactor;
   } else {
-    console.log('starting point origin load beginning');
-    main.innerHTML += nextImageHTML(0, scrollFactor);
+    main.innerHTML += nextImageHTML('', scrollFactor);
+    datasetStart = extractPoint('');
+    datasetEnd = scrollFactor;
+    console.log('datsetend:', datasetEnd);
   }
 });
