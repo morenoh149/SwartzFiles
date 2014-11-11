@@ -1,7 +1,10 @@
+.affix,
+.affix-top,
+.affix-bottom,
 #myAffix {
   border: 1px solid #000;
 }
-.sidebar {
+#sidebar {
   position: fixed;
   top: 0;
   left: 0;
@@ -10,12 +13,15 @@
   overflow-y: auto;
   overflow-x: hidden;
 }
-.main {
+#sidebar h2 {
+  padding-left: 5px;
+}
+#main {
   width: 550px;
   margin: 40px 0 50px 200px;
 }
 h2 {
-  font-size: 25px;
+  font-size: 16px;
 }
 img {
   width: 800px;
