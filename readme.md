@@ -11,3 +11,6 @@ Instead of having to download the pdfs you can view them as a webpage.
 * provide .tar.gz link to entire OCR and/or pdf dataset
 * use poppler/OCR/mechanical turk to build plain-text dataset
 * provide full-text search of the database and navigate to specfic page upon click
+
+# Usage
+`npm install`
