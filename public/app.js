@@ -59,19 +59,19 @@ function nextImageHTML(start, delta) {
   console.log('start: ', start);
   if (start === '') {
     for (var i = 1; i <= delta; i++) {
-      dom += '<a id="part1-' + i + '">Part-1-Page' + i + '</a>' +
+      dom += '<a id="part1-' + i + '" href="#part1-' + i + '">Part-1-Page' + i + '</a>' +
            '<img src="http://swartzfiles.org/foia-request-001-page-' + zeroFill(i,3) + '.jpg">';
     }
   } else if (validHash(start)) {
     var num = extractPoint(start);
     if (delta > 0) {
       for (var i = num; i < num+delta; i++) {
-        dom += '<a id="part1-' + i + '">Part-1-Page' + i + '</a>' +
+        dom += '<a id="part1-' + i + '" href="#part1-' + i +'">Part-1-Page' + i + '</a>' +
              '<img src="http://swartzfiles.org/foia-request-001-page-' + zeroFill(i,3) + '.jpg">';
       }
     } else if (delta < 0) {
       for (var i = num; i > num-delta; i--) {
-        dom += '<a id="part1-' + i + '">Part-1-Page' + i + '</a>' +
+        dom += '<a id="part1-' + i + '" href="#part1-' + i +'">Part-1-Page' + i + '</a>' +
              '<img src="http://swartzfiles.org/foia-request-001-page-' + zeroFill(i,3) + '.jpg">';
       }
     } else {
