@@ -3,6 +3,7 @@ var gulp = require('gulp'),
     nodemon = require('gulp-nodemon'),
     style = require('gulp-stylus'),
     plumber = require('gulp-plumber'),
+    sync = require('browser-sync'),
     // uncss = require('gulp-uncss'),
     // watch = require('gulp-watch'),
     koutoSwiss = require('kouto-swiss');
@@ -35,6 +36,16 @@ gulp.task('serve', function(cb) {
         cb();
       }
     });
+});
+
+gulp.task('sync', ['watch'], function() {
+  sync({
+    server: {
+      baseDir: 'public/'
+    },
+    open: true,
+    port: 9000
+  });
 });
 
 gulp.task('style', function() {
