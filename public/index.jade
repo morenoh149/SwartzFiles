@@ -1,4 +1,13 @@
 doctype html
+
+mixin zeroFill(number)
+  if (number < 10)
+    img(src='http://swartzfiles.org/foia-request-001-page-00' + number + '.jpg')
+  else if (number < 100)
+    img(src='http://swartzfiles.org/foia-request-001-page-0' + number + '.jpg')
+  else
+    img(src='http://swartzfiles.org/foia-request-001-page-' + number + '.jpg')
+
 html
   head
     meta(charset="utf-8")
@@ -60,10 +69,5 @@ html
       - m = 1
       - while (m < 105)
         a(href='#part1-#{m}' id='part1-#{m}') Part1-Page#{m}
-        if (m < 10)
-          img(src='http://swartzfiles.org/foia-request-001-page-00#{m}.jpg')
-        else if (m < 100)
-          img(src='http://swartzfiles.org/foia-request-001-page-0#{m}.jpg')
-        else if (m < 1000)
-          img(src='http://swartzfiles.org/foia-request-001-page-#{m}.jpg')
+        +zeroFill(m)
         - m++
