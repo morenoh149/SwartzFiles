@@ -1,54 +1,40 @@
 'use strict';
 var gulp = require('gulp'),
-    nodemon = require('gulp-nodemon'),
     style = require('gulp-stylus'),
     plumber = require('gulp-plumber'),
+    jade = require('gulp-jade'),
     sync = require('browser-sync'),
-    // uncss = require('gulp-uncss'),
-    // watch = require('gulp-watch'),
     koutoSwiss = require('kouto-swiss');
 
-var started = false;
 var paths = {
   stylus: './stylus/style.styl',
   css: './public/styles/',
-  js: [
-    '**/*.js',
-    '!node_modules'
-  ],
-  jade: './templates/**/*.js'
+  jade: './public/index.jade',
+  html: './public/'
 };
-
-gulp.task('serve', function(cb) {
-  nodemon({
-  script: './app.js',
-  ext: 'js',
-  watch: [paths.jade],
-  env: {
-    'NODE_ENV': 'development'
-  },
-  ignore: ['./core/**']
-  //nodeArgs: ['--debug']
-  })
-    .on('start', function() {
-      if (!started) {
-        started = true;
-        cb();
-      }
-    });
-});
 
 gulp.task('sync', ['watch'], function() {
   sync({
     server: {
       baseDir: 'public/'
     },
+    watchFiles: [
+      paths.html + 'index.html',
+      paths.css + 'style.css'
+    ],
     open: true,
     port: 9000
   });
 });
 
-gulp.task('style', function() {
+gulp.task('jade', function() {
+  return gulp.src(paths.jade)
+    .pipe(plumber())
+    .pipe(jade())
+    .pipe(gulp.dest(paths.html));
+});
+
+gulp.task('stylus', function() {
   return gulp.src(paths.stylus)
     .pipe(plumber())
     .pipe(style({
@@ -58,8 +44,9 @@ gulp.task('style', function() {
     .pipe(gulp.dest(paths.css));
 });
 
-gulp.task('watch', function() {
-  gulp.watch(paths.stylus, ['style']);
+gulp.task('watch', ['jade', 'stylus'], function() {
+  gulp.watch(paths.stylus, ['stylus']);
+  gulp.watch(paths.jade, ['jade']);
 });
 
-gulp.task('default', ['serve', 'style', 'watch']);
+gulp.task('default', ['stylus', 'jade', 'watch', 'sync']);
