@@ -1,4 +1,3 @@
-'use strict';
 var gulp = require('gulp'),
     style = require('gulp-stylus'),
     plumber = require('gulp-plumber'),
@@ -14,6 +13,7 @@ var paths = {
 };
 
 gulp.task('sync', ['watch'], function() {
+  'use strict'; // placed within first function to avoid warning
   sync({
     server: {
       baseDir: 'public/'
