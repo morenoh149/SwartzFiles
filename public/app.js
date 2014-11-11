@@ -7,6 +7,7 @@ var ImageHeight = 1035;
 var FontHeight = 16;
 var HeaderHeight = 39;
 var topScrollCorrection = ((FontHeight + 2 + ImageHeight) * scrollFactor) - HeaderHeight - 300;
+var startPoint = window.location.hash
 
 /* run javascript code while scrolling
  * responsible for detecting end of content and loading more
@@ -40,13 +41,23 @@ window.onscroll = function (ev) {
 };
 
 /* generates next anchor+imageTags for injecting into the dom
- * aggresivity controlled by delta
+ * given starting point and delta
  */
-function nextImageHTML(delta) {
+function nextImageHTML(start, delta) {
   var str = '';
-  for (var i = 0; i < delta; i++) {
-    str += '<a id="part1-' + i + '">Part-1-Page' + i + '</a>' +
-         '<img src="http://swartzfiles.org/foia-request-001-page-' + zeroFill(i,3) + '.jpg">';
+  if (start === 0) {
+    for (var i = 0; i < delta; i++) {
+      str += '<a id="part1-' + i + '">Part-1-Page' + i + '</a>' +
+           '<img src="http://swartzfiles.org/foia-request-001-page-' + zeroFill(i,3) + '.jpg">';
+    }
+  } else {
+    var num = parseInt(start.slice(7), 10);
+    var j = num - 3 < 0 ? 0 : num - 3;
+    var end = j + delta;
+    for (; j < end; j++) {
+      str += '<a id="part1-' + j + '">Part-1-Page' + j + '</a>' +
+           '<img src="http://swartzfiles.org/foia-request-001-page-' + zeroFill(j,3) + '.jpg">';
+    }
   }
   return str;
 }
@@ -66,9 +77,22 @@ function zeroFill(num, mag) {
   return result;
 }
 
+/* sanitizes browser hash
+ * we only use it if it fits the format we expect
+ */
+function sanitizeHash(str) {
+  return str.slice(0,7) === '#part1-' ? true : false;
+}
+
 /* JQuery padded code
  */
 $(function() {
   var main = document.getElementById('main');
-  console.log(main);
+  if (sanitizeHash(window.location.hash)) {
+    console.log('starting point middle load buffers');
+    main.innerHTML = nextImageHTML(window.location.hash, scrollFactor);
+  } else {
+    console.log('starting point origin load beginning');
+    main.innerHTML += nextImageHTML(0, scrollFactor);
+  }
 });
