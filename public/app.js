@@ -4,7 +4,7 @@ var scrollFactor = 10;
 var ImageHeight = 1035;
 var FontHeight = 16;
 var HeaderHeight = 39;
-// var topScrollCorrection = ((FontHeight + 2 + ImageHeight) * scrollFactor) - HeaderHeight - 300;
+var topScrollCorrection = ((FontHeight + 2 + ImageHeight) * scrollFactor+1);
 var hash = window.location.hash;
 var datasetEnd = 0;
 var datasetStart = 0;
@@ -23,7 +23,7 @@ window.onscroll = function (ev) {
 
   // run on scroll bottom
   if ((scrollpoint + winheight) >= docHeight) {
-    main.innerHTML += nextImageHTML("#part1-" + (datasetEnd+1), scrollFactor);
+    main.innerHTML += nextImageHTML("#part1-" + datasetEnd, scrollFactor);
     datasetEnd += scrollFactor;
   }
 
@@ -32,6 +32,9 @@ window.onscroll = function (ev) {
     main.innerHTML = nextImageHTML("#part1-"+datasetStart, scrollFactor*-1) + main.innerHTML;
     datasetStart -= scrollFactor;
     if (datasetStart < 1) datasetStart = 1;
+    window.setTimeout(function() {
+      if (datasetStart !== 1) window.scrollBy(0, topScrollCorrection);
+    }, 500);
   }
 };
 
@@ -48,6 +51,8 @@ window.onscroll = function (ev) {
  * (25, -3) -> [22, 24]
  */
 function nextImageHTML(start, delta) {
+  console.log('start', start);
+  console.log('delta', delta);
   var dom = '';
   if (start === '') {
     for (var i = 1; i <= delta; i++) {
@@ -56,6 +61,7 @@ function nextImageHTML(start, delta) {
     }
   } else if (validHash(start)) {
     var num = extractPoint(start);
+    console.log('num', num);
     if (num === 1) {
       // do nothing this is the beginning of the dataset
     } else if (delta > 0) {
@@ -64,7 +70,9 @@ function nextImageHTML(start, delta) {
              '<img src="http://swartzfiles.org/foia-request-001-page-' + zeroFill(i,3) + '.jpg">';
       }
     } else if (delta < 0) {
-      for (var i = num; i > num-delta; i--) {
+      var i = num+delta; // a + -(b) = a - b
+      if (i < 1) i = 1;
+      for (; i < num; i++) {
         dom += '<a id="part1-' + i + '" href="#part1-' + i +'">Part-1-Page' + i + '</a>' +
              '<img src="http://swartzfiles.org/foia-request-001-page-' + zeroFill(i,3) + '.jpg">';
       }
@@ -115,8 +123,10 @@ $(function() {
     main.innerHTML = nextImageHTML(hash, -3) + nextImageHTML(hash, scrollFactor);
     datasetStart = extractPoint(hash) - 3;
     datasetEnd = extractPoint(hash) + scrollFactor;
+    console.log('datasetStart', datasetStart);
+    console.log('datasetEnd', datasetEnd);
   } else {
-    main.innerHTML += nextImageHTML('', scrollFactor);
+    main.innerHTML += nextImageHTML('', scrollFactor-1);
     datasetStart = extractPoint('');
     datasetEnd = scrollFactor;
   }
