@@ -1,7 +1,6 @@
 {
   "name": "aaronSwartzHackathon2014",
   "version": "0.0.0",
-  "repository": "https://github.com/morenoh149/SwartzFiles.git"
   "description": "FOIA viewer",
   "main": "app.js",
   "scripts": {
