@@ -14,3 +14,6 @@ Instead of having to download the pdfs you can view them as a webpage.
 
 # Usage
 `npm install`
+
+# License
+MIT
