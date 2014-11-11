@@ -4,7 +4,7 @@ var scrollFactor = 10;
 var ImageHeight = 1035;
 var FontHeight = 16;
 var HeaderHeight = 39;
-var topScrollCorrection = ((FontHeight + 2 + ImageHeight) * scrollFactor) - HeaderHeight - 300;
+// var topScrollCorrection = ((FontHeight + 2 + ImageHeight) * scrollFactor) - HeaderHeight - 300;
 var hash = window.location.hash;
 var datasetEnd = 0;
 var datasetStart = 0;
@@ -25,9 +25,6 @@ window.onscroll = function (ev) {
   if ((scrollpoint + winheight) >= docHeight) {
     main.innerHTML += nextImageHTML("#part1-" + (datasetEnd+1), scrollFactor);
     datasetEnd += scrollFactor;
-    console.log('datsetend:', datasetEnd);
-    window.setTimeout(function() {
-    }, 3000);
   }
 
   // run on scroll top
@@ -35,10 +32,6 @@ window.onscroll = function (ev) {
     main.innerHTML = nextImageHTML("#part1-"+datasetStart, scrollFactor*-1) + main.innerHTML;
     datasetStart -= scrollFactor;
     if (datasetStart < 1) datasetStart = 1;
-    window.setTimeout(function() {
-      console.log('try to scroll correct by', topScrollCorrection);
-      window.scrollTo(0, topScrollCorrection);
-    }, 100);
   }
 };
 
@@ -56,7 +49,6 @@ window.onscroll = function (ev) {
  */
 function nextImageHTML(start, delta) {
   var dom = '';
-  console.log('start: ', start);
   if (start === '') {
     for (var i = 1; i <= delta; i++) {
       dom += '<a id="part1-' + i + '" href="#part1-' + i + '">Part-1-Page' + i + '</a>' +
@@ -64,7 +56,9 @@ function nextImageHTML(start, delta) {
     }
   } else if (validHash(start)) {
     var num = extractPoint(start);
-    if (delta > 0) {
+    if (num === 1) {
+      // do nothing this is the beginning of the dataset
+    } else if (delta > 0) {
       for (var i = num; i < num+delta; i++) {
         dom += '<a id="part1-' + i + '" href="#part1-' + i +'">Part-1-Page' + i + '</a>' +
              '<img src="http://swartzfiles.org/foia-request-001-page-' + zeroFill(i,3) + '.jpg">';
@@ -125,6 +119,5 @@ $(function() {
     main.innerHTML += nextImageHTML('', scrollFactor);
     datasetStart = extractPoint('');
     datasetEnd = scrollFactor;
-    console.log('datsetend:', datasetEnd);
   }
 });
