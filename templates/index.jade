@@ -1,14 +1,6 @@
 doctype html
-
-mixin zeroFill(number)
-  if (number < 10)
-    img(src='http://swartzfiles.org/foia-request-001-page-00' + number + '.jpg')
-  else if (number < 100)
-    img(src='http://swartzfiles.org/foia-request-001-page-0' + number + '.jpg')
-  else
-    img(src='http://swartzfiles.org/foia-request-001-page-' + number + '.jpg')
-
 html
+  include utilites.jade
   head
     meta(charset="utf-8")
     meta(http-equiv="X-UA-Compatible" content="IE=edge")
@@ -29,6 +21,7 @@ html
 
       ga('create', 'UA-42985946-6', 'auto');
       ga('send', 'pageview');
+
   body
     - var pageTotals = [104,26,379,4067,190,1,1,1,7,237397,90,259,17,0,254,9,13,547,403,2,533,33,309]
     - var pageTotalsLess = [26, 379, 4067, 190, 1, 1, 1, 7, 237397, 90, 259, 17, 0, 254, 9, 13, 547, 403, 2, 533, 33, 309]
@@ -41,7 +34,8 @@ html
         .panel.panel-default
           .panel-heading(role='tab' id='heading1')
             h4.panel-title
-              a(data-toggle='collapse' data-parent='#accordion' href='#collapse1' aria-expanded='true' aria-controls='collapse1')
+              a(data-toggle='collapse' data-parent='#accordion' href='#collapse1'
+                aria-expanded='true' aria-controls='collapse1')
                 p Part 1
         .panel-collapse.collapse.in(role='tabpanel' aria-labelledby='heading1' id='collapse1')
           .panel-body
@@ -57,7 +51,8 @@ html
           .panel.panel-default
             .panel-heading(role='tab' id='heading#{n}')
               h4.panel-title
-                a(data-toggle='collapse' data-parent='#accordion' href='#collapse#{n}' aria-expanded='false' aria-controls='collapse#{n}')
+                a(data-toggle='collapse' data-parent='#accordion' href='#collapse#{n}'
+                  aria-expanded='false' aria-controls='collapse#{n}')
                   p Part #{n}
           .panel-collapse.collapse(role='tabpanel' aria-labelledby='heading#{n}' id='collapse#{n}')
             .panel-body
@@ -69,5 +64,5 @@ html
       - m = 1
       - while (m < 105)
         a(href='#part1-#{m}' id='part1-#{m}') Part1-Page#{m}
-        +zeroFill(m)
+        +makeImageTag(m)
         - m++

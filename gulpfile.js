@@ -9,7 +9,7 @@ var gulp = require('gulp'),
 var paths = {
   stylus: './stylus/style.styl',
   css: './public/styles/',
-  jade: './public/index.jade',
+  jade: './templates/index.jade',
   html: './public/'
 };
 
