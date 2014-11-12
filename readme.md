@@ -3,7 +3,7 @@ A linkable presentation of Aaron Swartz Freedom Of Information Act response from
 and FBI found [here](http://theblackvault.com/m/articles/view/Aaron-Swartz).
 Instead of having to download the pdfs you can view them as a webpage.
 
-[Demo](http://underwriter-porter-80353.bitballoon.com)
+[Demo](http://morenoh149.github.io/SwartzFiles)
 
 # TODO
 * add cloudfront or fastly cdn for faster global delivery
@@ -14,3 +14,6 @@ Instead of having to download the pdfs you can view them as a webpage.
 
 # Usage
 `npm install`
+
+# License
+MIT

@@ -1,0 +1,69 @@
+doctype html
+html
+  include utilities.jade
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    title= 'Aaron Swartz Files'
+    meta(name="viewport", content="width=device-width, initial-scale=1.0, user-scalable=no")
+    meta(name='description', content='')
+    link(rel="shortcut icon", href="/favicon.ico", type="image/x-icon")
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css")
+    link(rel="stylesheet" href="styles/style.css")
+    script(src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js")
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js")
+    script(src='app.js')
+    script.
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-42985946-6', 'auto');
+      ga('send', 'pageview');
+
+  body
+    - var pageTotals = [104,26,379,4067,190,1,1,1,7,237397,90,259,17,0,254,9,13,547,403,2,533,33,309]
+    - var pageTotalsLess = [26, 379, 4067, 190, 1, 1, 1, 7, 237397, 90, 259, 17, 0, 254, 9, 13, 547, 403, 2, 533, 33, 309]
+    - var numOfPdfs = 21
+
+    #sidebar
+      h2 Secret Service Response to Request for Aaron Swartz' Records
+      .panel-group#accordion(role='tablist' aria-multiselectable='true')
+
+        .panel.panel-default
+          .panel-heading(role='tab' id='heading1')
+            h4.panel-title
+              a(data-toggle='collapse' data-parent='#accordion' href='#collapse1'
+                aria-expanded='true' aria-controls='collapse1')
+                | Part 1
+        .panel-collapse.collapse.in(role='tabpanel' aria-labelledby='heading1' id='collapse1')
+          .panel-body
+            ul.list-unstyled
+              - m = 1
+              - while (m < 105)
+                li
+                  a(href='#part1-#{m}') page #{m}
+                - m++
+
+        - n = 2
+        - while (n <= numOfPdfs)
+          .panel.panel-default
+            .panel-heading(role='tab' id='heading#{n}')
+              h4.panel-title
+                a(data-toggle='collapse' data-parent='#accordion' href='#collapse#{n}'
+                  aria-expanded='false' aria-controls='collapse#{n}')
+                  | Part #{n}
+          .panel-collapse.collapse(role='tabpanel' aria-labelledby='heading#{n}' id='collapse#{n}')
+            .panel-body
+              p part #{n}
+          - n++
+
+    #main
+      // h1 Swartz Files
+      br
+      - m = 1
+      - while (m < 1)
+        a(href='#part1-#{m}' id='part1-#{m}') Part1-Page#{m}
+        +makeImageTag(m)
+        - m++
