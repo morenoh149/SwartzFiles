@@ -51,8 +51,6 @@ window.onscroll = function (ev) {
  * (25, -3) -> [22, 24]
  */
 function nextImageHTML(start, delta) {
-  console.log('start', start);
-  console.log('delta', delta);
   var dom = '';
   if (start === '') {
     for (var i = 1; i <= delta; i++) {
@@ -61,7 +59,6 @@ function nextImageHTML(start, delta) {
     }
   } else if (validHash(start)) {
     var num = extractPoint(start);
-    console.log('num', num);
     if (num === 1) {
       // do nothing this is the beginning of the dataset
     } else if (delta > 0) {
@@ -123,8 +120,6 @@ $(function() {
     main.innerHTML = nextImageHTML(hash, -3) + nextImageHTML(hash, scrollFactor);
     datasetStart = extractPoint(hash) - 3;
     datasetEnd = extractPoint(hash) + scrollFactor;
-    console.log('datasetStart', datasetStart);
-    console.log('datasetEnd', datasetEnd);
   } else {
     main.innerHTML += nextImageHTML('', scrollFactor-1);
     datasetStart = extractPoint('');
