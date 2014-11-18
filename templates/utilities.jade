@@ -5,3 +5,8 @@ mixin makeImageTag(pgNum)
     img(src='http://swartzfiles.org/foia-request-001-page-0' + pgNum + '.jpg')
   else
     img(src='http://swartzfiles.org/foia-request-001-page-' + pgNum + '.jpg')
+
+// Produces an anchor tag for the sidebar given a part number and page number
+//  a(href='#part1-1') page 1
+mixin makeAnchorTag(part, page)
+  a(href='#part#{part}-#{page}') page #{page}

@@ -24,47 +24,56 @@ html
       ga('send', 'pageview');
 
   body
-    - var pageTotals = [104,26,379,4067,190,1,1,1,7,237397,90,259,17,0,254,9,13,547,403,2,533,33,309]
-    - var pageTotalsLess = [26, 379, 4067, 190, 1, 1, 1, 7, 237397, 90, 259, 17, 0, 254, 9, 13, 547, 403, 2, 533, 33, 309]
-    - var numOfPdfs = 21
+    - var pageTotalsActual = [104,26,379,4067,190,1,1,1,7,237397,90,259,17,0,254,9,13,547,403,2,533,33,309]
+    - var pageTotals = [104,26,379,4067,190,1,1,1,7,0,90,259,17,0,254,9,13,547,403,2,533,33,309]
+    - var numOfPdfs = pageTotals.length
 
     #sidebar
       h1 SwartzFiles
       h2
         a(href="https://github.com/morenoh149/SwartzFiles")
-          | Source 
+          | Source
           i.fa.fa-github
+      span.twitter
+        a.twitter-share-button(href="https://twitter.com/share" data-url="http://swartzfiles.org" data-related="morenoh149" data-hashtags="aaronSwartz") Tweet
+        script.
+          !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
       h3 Secret Service Response to Request for Aaron Swartz' Records
       .panel-group#accordion(role='tablist' aria-multiselectable='true')
-
-        .panel.panel-default
-          .panel-heading(role='tab' id='heading1')
-            h4.panel-title
-              a(data-toggle='collapse' data-parent='#accordion' href='#collapse1'
-                aria-expanded='true' aria-controls='collapse1')
-                | Part 1
-        .panel-collapse.collapse.in(role='tabpanel' aria-labelledby='heading1' id='collapse1')
-          .panel-body
-            ul.list-unstyled
-              - m = 1
-              - while (m < 105)
-                li
-                  a(href='#part1-#{m}') page #{m}
-                - m++
-
-        - n = 2
+        - n = 1
         - while (n <= numOfPdfs)
           .panel.panel-default
             .panel-heading(role='tab' id='heading#{n}')
               h4.panel-title
-                a(data-toggle='collapse' data-parent='#accordion' href='#collapse#{n}'
-                  aria-expanded='false' aria-controls='collapse#{n}')
-                  | Part #{n}
-          .panel-collapse.collapse(role='tabpanel' aria-labelledby='heading#{n}' id='collapse#{n}')
-            .panel-body
-              p part #{n}
+                if (n === 1)
+                  a(data-toggle='collapse' data-parent='#accordion' href='#collapse#{n}'
+                    aria-expanded='true' aria-controls='collapse#{n}') Part #{n}
+                else
+                  a(data-toggle='collapse' data-parent='#accordion' href='#collapse#{n}'
+                    aria-expanded='false' aria-controls='collapse#{n}') Part #{n}
+          if (n === 1)
+            .panel-collapse.collapse.in(role='tabpanel' aria-labelledby='heading#{n}' id='collapse#{n}')
+              .panel-body
+                ul.list-unstyled
+                  - i = 1
+                  - while (i <= pageTotals[n-1])
+                    li
+                      +makeAnchorTag(n, i)
+                    - i++
+          else
+            .panel-collapse.collapse(role='tabpanel' aria-labelledby='headings#{n}' id='collapse#{n}')
+              .panel-body
+                ul.list-unstyled
+                  - i = 1
+                  if (n === 10)
+                    | Part 10 is too long to display here
+                  if (n === 14)
+                    | Part 14 is unreleased
+                  - while (i <= pageTotals[n-1])
+                    li
+                      +makeAnchorTag(n, i)
+                    - i++
           - n++
-
     #main
       // h1 Swartz Files
       br

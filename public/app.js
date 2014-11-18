@@ -8,6 +8,8 @@ var topScrollCorrection = ((FontHeight + 2 + ImageHeight) * scrollFactor+1);
 var hash = window.location.hash;
 var datasetEnd = 0;
 var datasetStart = 0;
+var pageTotalsActual = [104,26,379,4067,190,1,1,1,7,237397,90,259,17,0,254,9,13,547,403,2,533,33,309];
+var pageTotals = [104,26,379,4067,190,1,1,1,7,0,90,259,17,0,254,9,13,547,403,2,533,33,309];
 
 /* run javascript code while scrolling
  * responsible for detecting end of content and loading more
