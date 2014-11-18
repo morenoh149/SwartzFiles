@@ -10,6 +10,7 @@ html
     link(rel="shortcut icon", href="/favicon.ico", type="image/x-icon")
     link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css")
     link(rel="stylesheet" href="styles/style.css")
+    link(href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet")
     script(src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js")
     script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js")
     script(src='app.js')
@@ -28,9 +29,12 @@ html
     - var numOfPdfs = 21
 
     #sidebar
-      h2 Secret Service Response to Request for Aaron Swartz' Records
-      h3
-        a(href="https://github.com/morenoh149/SwartzFiles") Github Source
+      h1 SwartzFiles
+      h2
+        a(href="https://github.com/morenoh149/SwartzFiles")
+          | Source 
+          i.fa.fa-github
+      h3 Secret Service Response to Request for Aaron Swartz' Records
       .panel-group#accordion(role='tablist' aria-multiselectable='true')
 
         .panel.panel-default
