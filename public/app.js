@@ -64,6 +64,7 @@ function nextImageHTML(start, delta) {
     if (num === 1) {
       // do nothing this is the beginning of the dataset
     } else if (delta > 0) {
+      console.log('result of helper ', parseStartString(start));
       for (var i = num; i < num+delta; i++) {
         dom += '<a id="part1-' + i + '" href="#part1-' + i +'">Part-1-Page' + i + '</a>' +
              '<img src="http://swartzfiles.org/foia-request-001-page-' + zeroFill(i,3) + '.jpg">';
@@ -80,6 +81,18 @@ function nextImageHTML(start, delta) {
     }
   }
   return dom;
+}
+
+/* given a start string,
+ * return representative {part,page} pair
+ */
+function parseStartString(start) {
+  var result = /(\d+)-(\d+)/.exec(start);
+  if(result.index === 5) {
+    return { part: result[1],
+              page: result[2]
+    };
+  }
 }
 
 /* accepts a number and magnitude
